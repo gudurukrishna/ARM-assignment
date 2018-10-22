@@ -1,0 +1,28 @@
+;FIBONACCI SERIES
+     AREA     appcode, CODE, READONLY
+     EXPORT __main
+	 ENTRY 
+__main  FUNCTION		 		
+                   MOV  r0, #0x000 ;firtst term
+         MOV  r1, #0x001 ;second term
+		 MOV  r2, #0x001 ; count
+		 MOV  r3, #0x009 ; Number of terms in series
+		 
+		 CMP r2, r3 
+		 IT EQ
+			BEQ stop
+			;ADD r7, r7, #1
+LOOP	ADD r4, r0, r1  ;calculating next term
+					MOV r0, r1
+					MOV r1, r4
+					ADD r2, r2, #1
+					CMP r2, r3
+					BNE LOOP
+        		
+
+         
+		 
+      
+stop B stop ; stop program
+     ENDFUNC
+     END
