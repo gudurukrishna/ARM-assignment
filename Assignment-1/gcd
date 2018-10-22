@@ -1,0 +1,19 @@
+     AREA     appcode, CODE, READONLY
+     EXPORT __main
+	 ENTRY 
+__main  FUNCTION		 		
+         MOV  r0, #0x009 ;first number
+         MOV  r1, #0x007 ;second number
+LOOP 	 CMP r0, r1
+		 IT EQ
+		 BEQ stop
+		 ITE GT
+		 SUBGT r0, r0, r1
+		 SUBLE r1, r1, r0
+		 B LOOP
+         
+		 
+      
+stop B stop ; stop program
+     ENDFUNC
+     END
