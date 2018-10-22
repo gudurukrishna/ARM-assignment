@@ -1,0 +1,24 @@
+;LARGEST NUMBER IS FINALLY STORED IN R4
+     AREA     appcode, CODE, READONLY
+     EXPORT __main
+	 ENTRY 
+__main  FUNCTION		 		
+         MOV  r0, #0x00B ;first number
+         MOV  r1, #0x00A ;second number
+		 MOV  r2, #0x00C ;Third number
+		 ;MOV  r3, r1 ; Number of terms in series
+		CMP r0, r1 ; Compare R0 and R1, setting flags
+        ITT GT ; Skip next two instructions unless GT condition holds
+	    CMPGT r0, r2 ; If 'greater than', compare R2 and R0, setting flags
+	    MOVGT r4, r0 ; If still 'greater than', do R4 = R0
+        CMP r1, r2
+		ITE GT
+		MOVGT r4, r1
+		MOVLE r4, r2
+
+         
+		 
+      
+stop B stop ; stop program
+     ENDFUNC
+     END
