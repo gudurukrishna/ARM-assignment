@@ -1,0 +1,39 @@
+a. IF-THEN-ELSE is a conditional statement. We can use this in two ways,
+     1.IT
+	The syntax for the above is as follows
+	IT {condition}
+	instruction    ;  if the condition is true, then this instruction is executed else skipped.
+ 
+     2.ITE
+	The syntax for the above is as follows
+	ITE {condition}
+	instruction a   ; executed only if the condition is TRUE
+	instruction b   ; executed only if the condition is FALSE
+b. In both the above types, the number of T's in the "IT" instrucion will indicate the number of instructions in the if block
+   and the same goes for the else block(number of E's).
+   
+c. There are some restrictions while using an IT or ITE block.
+     1. A branch or any instruction that modifies the PC must either be outside an IT block or must be the last instruction inside the IT block. 
+     2. Do not branch to any instruction inside an IT block, except when returning from an exception handler.
+     3. All conditional instructions except Bcond must be inside an IT block. Bcond can be either outside or inside an IT block but has a larger branch range 
+        if it is inside one.
+     4. Each instruction inside the IT block must specify a condition code suffix that is either the same or logical inverse as for the other instructions in the block.
+
+d. In CODE-1, if we observe the instructions in the IT block are not conditional i.e. no suffix is added.
+	ITTTE LT ; or N != V
+	MOV R3, #0x100
+	MOV R8, #0x200
+	MOV R7, #0x200
+	MOV R6, #0x200
+    It violates the 4th rule mentioned in the restricitons above and since there are 4 such intructions we are getting 4 errors.
+
+e. While in CODE-2 all the instructions in the IT block have conditional suffix, so the code doesn't give any errors.
+
+	ITTTE LT ; or N != V
+	MOV R3, #0x100
+	MOV R8, #0x200
+	MOV R7, #0x200
+	MOV R6, #0x200
+f. The error says that "specified condition is not consistent with the previous IT". Since there is no codition suffix(in this case LT for first three and GE for fourth) after the instruction in CODE-1 and we gave a 
+   condition for the IT block i.e LT, it is throwing this error.
+   
