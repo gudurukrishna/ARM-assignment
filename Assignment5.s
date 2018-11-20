@@ -8,7 +8,7 @@ __main  FUNCTION
 			  VLDR.F32 S13, =1 ; DATA FOR X1
 			  VLDR.F32 S14, =1 ; DATA FOR X2
 			  ADR.W r2, Branch_Table
-			  MOV r1, #0
+			  MOV r1, #1
 			  TBB [r2 , r1]
 
 
@@ -100,12 +100,8 @@ SIGMOID VADD.F32 S10, S2, S11
 
 
 LOOP_FINAL      VLDR.F32 S21 , =0.5
-			    VCMP.F32     S21 , S10  ; comparing with 0.5, if greater then final output is '1' else '0'
-			    VMRS r1 , FPSCR                    
-				MOV r2 , #1
-				LSL r2 , r2 ,#31
-				AND r1 , r1, r2
-				CMP r1 , #0
+			    VCMP.F32     S10 , S21  ; comparing with 0.5, if greater then final output is '1' else '0'
+			    VMRS.F32 APSR_nzcv , FPSCR                    
 				ITE  HI
 				MOVHI r0 , #0
 				MOVLS r0 , #1
